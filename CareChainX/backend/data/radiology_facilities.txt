@@ -1,0 +1,18 @@
+Bone Densitometry (DEXA Scan)
+Cardiac Imaging
+Computed Tomography
+Conventional X-ray
+Digital Radiography
+Fluoroscopy
+Mammography
+Magnetic Resonance Angiography
+Magnetic Resonance Cholangiopancreatography (MRCP)
+Magnetic Resonance Imaging (MRI)
+Nuclear Medicine Imaging
+PET-CT
+PET-MRI
+Portable Ultrasound
+Portable X-ray
+Ultrasound (2D,3D,4D)
+Ultrasound Color Doppler
+Ultrasound Elastography

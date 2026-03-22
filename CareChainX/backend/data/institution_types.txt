@@ -1,0 +1,5 @@
+Clinic
+Hospital
+Diagnostic Lab
+Radiology Centre
+Pharmacy

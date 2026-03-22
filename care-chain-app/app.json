@@ -1,0 +1,90 @@
+{
+  "expo": {
+    "name": "care-chain-app",
+    "slug": "care-chain-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "carechainapp",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        },
+        "NSLocalNetworkUsageDescription": "CareChain uses your local network to reach the development API on your computer (same Wi‑Fi)."
+      },
+      "bundleIdentifier": "com.carechain.app"
+    },
+    "android": {
+      "package": "com.carechain.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font"
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {
+            "infoPlist": {
+              "NSAppTransportSecurity": {
+                "NSAllowsLocalNetworking": true
+              },
+              "NSLocalNetworkUsageDescription": "CareChain uses your local network to reach the development API on your computer (same Wi‑Fi)."
+            }
+          }
+        }
+      ],
+      "expo-image",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "updates": {
+      "enabled": false,
+      "checkAutomatically": "NEVER",
+      "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a00363b7-8bfc-4815-8658-9d120b83fb3a"
+      }
+    },
+    "owner": "arulg"
+  }
+}

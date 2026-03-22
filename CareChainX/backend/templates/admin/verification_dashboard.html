@@ -1,0 +1,271 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div id="content-main">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <div x-data="{ tab: 'candidates', selectedProfileId: null, rejectionReason: '', rejectionTarget: null }" id="verificationDashboard">
+        <!-- Tabs -->
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <button @click="selectedProfileId = null; tab = 'candidates'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'candidates', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'candidates' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Candidate Profiles
+                </button>
+                <button @click="selectedProfileId = null; tab = 'employers'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'employers', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'employers' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Employer Profiles
+                </button>
+            </nav>
+        </div>
+
+        <!-- Candidate Profiles Tab -->
+        <div x-show="tab === 'candidates'">
+            <!-- List View -->
+            <ul x-show="!selectedProfileId" class="divide-y divide-gray-200 mt-4">
+                {% for candidate in candidates %}
+                    {# FIX: Only show profiles that have an Aadhaar number AND have at least one unverified credential #}
+                    {% if candidate.aadhaar_number and not candidate.is_aadhaar_verified or not candidate.is_qualification_verified or not candidate.is_experience_credential_verified or not candidate.is_skill_credential_verified %}
+                    <li @click="selectedProfileId = {{ candidate.id }}" class="py-4 px-2 flex justify-between items-center cursor-pointer hover:bg-gray-50 rounded-md">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">{{ candidate.user.get_full_name }}</p>
+                            <p class="text-sm text-gray-500">{{ candidate.user.email }} (ID: {{ candidate.id }})</p>
+                        </div>
+                        <div class="flex space-x-2 items-center text-xs">
+                            <span class="px-2 py-1 rounded-full {% if candidate.is_aadhaar_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Aadhaar</span>
+                            <span class="px-2 py-1 rounded-full {% if candidate.is_qualification_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Quals</span>
+                            <span class="px-2 py-1 rounded-full {% if candidate.is_experience_credential_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Exp</span>
+                            <span class="px-2 py-1 rounded-full {% if candidate.is_skill_credential_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Skills</span>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <!-- Detail View -->
+            {% for candidate in candidates %}
+                <div x-show="selectedProfileId === {{ candidate.id }}" class="mt-6 space-y-6" style="display: none;">
+                    <button @click="selectedProfileId = null" class="mb-4 text-indigo-600 hover:text-indigo-900">&larr; Back to list</button>
+                    <h2 class="text-2xl font-bold">{{ candidate.user.get_full_name }}'s Profile</h2>
+                    
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Aadhaar Verification {% if candidate.is_aadhaar_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        <p class="mt-2"><strong>Number:</strong> {{ candidate.aadhaar_number }}</p>
+                        {% for cred in candidate.credentials.all %}{% if cred.document_type == 'AADHAAR_PHOTO' %}
+                            <p class="mt-1"><strong>Document:</strong> <a href="{{ cred.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                        {% endif %}{% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('candidate', {{ candidate.id }}, 'is_aadhaar_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept</button>
+                            <button @click="rejectionTarget = {profile_type: 'candidate', profile_id: {{ candidate.id }}, credential_field: 'is_aadhaar_verified', data_field: 'aadhaar_number'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Qualification Verification {% if candidate.is_qualification_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        {% for edu in candidate.education.all %}
+                            <div class="mt-2 border-t pt-2">
+                                <p><strong>Degree:</strong> {{ edu.degree.name }} in {{ edu.year_of_graduation }}</p>
+                                <p><strong>Institution:</strong> {{ edu.institution }}, {{ edu.country.name }}</p>
+                                {% for doc in edu.supporting_documents.all %}
+                                    <p class="mt-1"><strong>Document:</strong> <a href="{{ doc.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                                {% endfor %}
+                            </div>
+                        {% empty %}
+                            <p class="text-gray-500">No education entries provided.</p>
+                        {% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('candidate', {{ candidate.id }}, 'is_qualification_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept All</button>
+                            <button @click="rejectionTarget = {profile_type: 'candidate', profile_id: {{ candidate.id }}, credential_field: 'is_qualification_verified', data_field: 'aadhaar_number'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject All</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Work Experience Verification {% if candidate.is_experience_credential_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        {% for exp in candidate.work_experience.all %}
+                            <div class="mt-2 border-t pt-2">
+                                <p><strong>Role:</strong> {{ exp.role }} at {{ exp.institution_name }}</p>
+                                <p><strong>Duration:</strong> {{ exp.start_date|date:"M Y" }} - {{ exp.end_date|date:"M Y"|default:"Present" }}</p>
+                                {% for doc in exp.supporting_documents.all %}
+                                    <p class="mt-1"><strong>Document:</strong> <a href="{{ doc.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                                {% endfor %}
+                            </div>
+                        {% empty %}
+                            <p class="text-gray-500">No work experience provided.</p>
+                        {% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('candidate', {{ candidate.id }}, 'is_experience_credential_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept All</button>
+                            <button @click="rejectionTarget = {profile_type: 'candidate', profile_id: {{ candidate.id }}, credential_field: 'is_experience_credential_verified', data_field: 'aadhaar_number'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject All</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Skill & Certification Verification {% if candidate.is_skill_credential_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        <p class="mt-2"><strong>Skills:</strong> {% for skill in candidate.skills.all %}{{ skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                        {% for cred in candidate.credentials.all %}{% if cred.document_type == 'CERTIFICATION' %}
+                            <p class="mt-1"><strong>Certification Document:</strong> <a href="{{ cred.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                        {% endif %}{% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('candidate', {{ candidate.id }}, 'is_skill_credential_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept All</button>
+                            <button @click="rejectionTarget = {profile_type: 'candidate', profile_id: {{ candidate.id }}, credential_field: 'is_skill_credential_verified', data_field: 'aadhaar_number'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject All</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Employer Profiles Tab -->
+        <div x-show="tab === 'employers'">
+            <!-- List View -->
+            <ul x-show="!selectedProfileId" class="divide-y divide-gray-200 mt-4">
+                {% for employer in employers %}
+                    {% if employer.representative_aadhaar_num and not employer.is_aadhaar_verified or not employer.is_credential_verified %}
+                    <li @click="selectedProfileId = {{ employer.id }}" class="py-4 px-2 flex justify-between items-center cursor-pointer hover:bg-gray-50 rounded-md">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">{{ employer.institution_name }} (Rep: {{ employer.user.get_full_name }})</p>
+                            <p class="text-sm text-gray-500">{{ employer.user.email }} (ID: {{ employer.id }})</p>
+                        </div>
+                        <div class="flex space-x-2 items-center text-xs">
+                            <span class="px-2 py-1 rounded-full {% if employer.is_aadhaar_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Aadhaar</span>
+                            <span class="px-2 py-1 rounded-full {% if employer.is_credential_verified %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">Docs</span>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <!-- Detail View -->
+            {% for employer in employers %}
+                <div x-show="selectedProfileId === {{ employer.id }}" class="mt-6 space-y-6" style="display: none;">
+                    <button @click="selectedProfileId = null" class="mb-4 text-indigo-600 hover:text-indigo-900">&larr; Back to list</button>
+                    <h2 class="text-2xl font-bold">{{ employer.institution_name }}'s Profile</h2>
+                    
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Institution Details</h3>
+                        <p class="mt-2"><strong>Type:</strong> {{ employer.institution_type.name }}</p>
+                        <p><strong>Address:</strong> {{ employer.institution_address }}, {{ employer.institution_pincode }}</p>
+                        <p><strong>Website:</strong> <a href="{{ employer.institution_website }}" target="_blank" class="text-indigo-600 hover:underline">{{ employer.institution_website }}</a></p>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Facility Details</h3>
+                        <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+                            {% if employer.outpatient_clinic %}<li>Outpatient Clinics</li>{% endif %}
+                            {% if employer.inpatient_facility %}<li>In-patient Facility ({{ employer.ip_bed_num|default:0 }} beds)</li>{% endif %}
+                            {% if employer.emd_room %}<li>Emergency Room ({{ employer.emd_bed_num|default:0 }} beds)</li>{% endif %}
+                            {% if employer.icu_facilities %}<li>ICU ({{ employer.icu_bed_num|default:0 }} beds)</li>{% endif %}
+                            {% if employer.nicupicu %}<li>NICU/PICU ({{ employer.nicupicu_bed_num|default:0 }} beds)</li>{% endif %}
+                            {% if employer.otroom %}<li>Operation Theatres ({{ employer.otroom_bed_num|default:0 }})</li>{% endif %}
+                            {% if employer.diag_lab %}<li>Diagnostic Lab</li>{% endif %}
+                            {% if employer.radio_lab %}<li>Radiology Department</li>{% endif %}
+                            {% if employer.pharmacy %}<li>Pharmacy</li>{% endif %}
+                            {% if employer.security %}<li>Security Personnel</li>{% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Representative Aadhaar Verification {% if employer.is_aadhaar_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        <p class="mt-2"><strong>Number:</strong> {{ employer.representative_aadhaar_num }}</p>
+                        {% for cred in employer.credentials.all %}{% if cred.document_type == 'AADHAAR_PHOTO' %}
+                            <p class="mt-1"><strong>Document:</strong> <a href="{{ cred.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                        {% endif %}{% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('employer', {{ employer.id }}, 'is_aadhaar_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept</button>
+                            <button @click="rejectionTarget = {profile_type: 'employer', profile_id: {{ employer.id }}, credential_field: 'is_aadhaar_verified', data_field: 'representative_aadhaar_num'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-semibold text-lg">Institution Credentials {% if employer.is_credential_verified %}<span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">Verified</span>{% else %}<span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">Pending</span>{% endif %}</h3>
+                        {% for cred in employer.credentials.all %}{% if cred.document_type != 'AADHAAR_PHOTO' %}
+                            <div class="mt-2 border-t pt-2">
+                                <p><strong>Type:</strong> {{ cred.get_document_type_display }}</p>
+                                <p class="mt-1"><strong>Document:</strong> <a href="{{ cred.file.url }}" target="_blank" class="text-indigo-600 hover:underline">View Document</a></p>
+                            </div>
+                        {% endif %}{% endfor %}
+                        <div class="mt-3 space-x-2">
+                            <button @click="verifyCredential('employer', {{ employer.id }}, 'is_credential_verified')" class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700">Accept All</button>
+                            <button @click="rejectionTarget = {profile_type: 'employer', profile_id: {{ employer.id }}, credential_field: 'is_credential_verified', data_field: 'representative_aadhaar_num'}" class="px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700">Reject All</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Rejection Modal -->
+        <div x-show="rejectionTarget" class="fixed z-10 inset-0 overflow-y-auto" style="display: none;">
+            <div @click.away="rejectionTarget = null" class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Reason for Rejection</h3>
+                        <div class="mt-2">
+                            <textarea x-model="rejectionReason" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="e.g., 'Aadhaar card photo is blurry.'"></textarea>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button @click="rejectCredential(rejectionTarget, rejectionReason)" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">Submit Rejection</button>
+                        <button @click="rejectionTarget = null; rejectionReason = ''" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // This function needs to be defined within the component's scope for Alpine.js to see it
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('verificationDashboard', () => ({
+                // ... your existing x-data properties
+                
+                rejectCredential(target, reason) {
+                    if (!reason) {
+                        alert('Please provide a reason for rejection.');
+                        return;
+                    }
+                    fetch('/api/verification/reject-credential/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({ ...target, reason: reason })
+                    }).then(response => {
+                        if (response.ok) { 
+                            alert('Rejection submitted!');
+                            this.rejectionTarget = null;
+                            this.rejectionReason = '';
+                            location.reload();
+                        } else { 
+                            alert('An error occurred.'); 
+                        }
+                    });
+                }
+            }));
+        });
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function verifyCredential(profileType, profileId, credentialField) {
+            fetch('/api/verification/verify-credential/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
+                credentials: 'same-origin',
+                body: JSON.stringify({ profile_type: profileType, profile_id: profileId, credential_field: credentialField })
+            }).then(response => {
+                if (response.ok) { alert('Credential approved!'); location.reload(); }
+                else { alert('An error occurred.'); }
+            });
+        }
+    </script>
+</div>
+{% endblock %}

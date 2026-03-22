@@ -1,0 +1,103 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    healthcheck: # Optional but good practice
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    environment:
+      - ALLOWED_HOSTS_EXTRA=web,${SITE_DOMAIN} # Change everytime NGROK is restarted
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_SECRET_TOKEN=${TELEGRAM_SECRET_TOKEN}
+      - BOT_API_KEY=${BOT_API_KEY}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    healthcheck: 
+      test: ["CMD", "curl", "-f", "http://localhost:8000/admin/login/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  celery_worker:
+    build: .
+    command: celery -A core worker -l info
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - SITE_DOMAIN=${SITE_DOMAIN} # Change every time Ngrok is restarted. Change to S3 Bucket During Production
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+    depends_on:
+      web:
+        condition: service_healthy # <-- Also wait for web to be healthy
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+  celery_beat:
+    build: .
+    # This command starts the scheduler instead of a worker
+    command: celery -A core beat -l info
+    volumes:
+      - .:/app
+    environment:
+      # It needs the same environment variables as the worker
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - SITE_DOMAIN=${SITE_DOMAIN}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+    depends_on:
+      - redis
+      - db
+  
+  
+volumes:
+  postgres_data:
+  media_data:

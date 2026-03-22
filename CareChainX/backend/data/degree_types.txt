@@ -1,0 +1,207 @@
+BA Psychology
+BAMS
+BASLP
+BBA Hospital Management
+BDS
+BE Biomedical Engineering
+BHA
+BHMS
+BNYS
+BOptom
+BPH
+BPO
+BPT
+BPharm
+BSMS
+BSW
+BSc Anaesthesia Technology
+BSc Audiology and Speech Language Pathology
+BSc Biochemistry
+BSc Biomedical Science
+BSc Biotechnology
+BSc Cardiac Care Technology
+BSc Cardio Pulmonary Technology
+BSc Cath Lab Technology
+BSc Clinical Nutrition and Dietetics
+BSc Clinical Psychology
+BSc Critical Care Technology
+BSc Dialysis Technology
+BSc Emergency and Trauma Care Technology
+BSc Emergency Medical Technology
+BSc Food and Nutrition
+BSc Genetics
+BSc Health Information Management
+BSc Medical Imaging Technology
+BSc Medical Laboratory Technology
+BSc Medical Microbiology
+BSc Neurophysiology Technology
+BSc Nuclear Medicine Technology
+BSc Nursing
+BSc Nutrition and Dietetics
+BSc Operation Theatre Technology
+BSc Optometry
+BSc Perfusion Technology
+BSc Physician Assistant
+BSc Radiography and Imaging Technology
+BSc Radiotherapy Technology
+BSc Respiratory Therapy
+BSc Speech and Hearing
+BSc Trauma Care Management
+BTech Biomedical Engineering
+BTech Biotechnology
+DM Addiction Psychiatry
+DM Cardiology
+DM Clinical Haematology
+DM Clinical Immunology and Rheumatology
+DM Endocrinology
+DM Gastroenterology
+DM Hepatology
+DM Infectious Diseases
+DM Interventional Radiology
+DM Medical Genetics
+DM Medical Oncology
+DM Neonatology
+DM Nephrology
+DM Neurology
+DM Paediatric Cardiology
+DM Paediatric Neurology
+DM Pulmonary Critical Care and Sleep Medicine
+DM Pulmonary Medicine
+DM Rheumatology
+DNB Broad Specialty
+DrNB Super Specialty
+MBBS
+MBA Hospital Administration
+MBA Hospital and Healthcare Management
+MCh Cardiothoracic and Vascular Surgery
+MCh Endocrine Surgery
+MCh Hand Surgery
+MCh Head and Neck Surgery
+MCh Neurosurgery
+MCh Paediatric Surgery
+MCh Plastic and Reconstructive Surgery
+MCh Surgical Gastroenterology
+MCh Surgical Oncology
+MCh Thoracic Surgery
+MCh Urology
+MCh Vascular Surgery
+MDS Conservative Dentistry and Endodontics
+MDS Oral and Maxillofacial Surgery
+MDS Oral Medicine and Radiology
+MDS Oral Pathology and Microbiology
+MDS Orthodontics and Dentofacial Orthopaedics
+MDS Pedodontics and Preventive Dentistry
+MDS Periodontology
+MDS Prosthodontics and Crown and Bridge
+MDS Public Health Dentistry
+MD Anaesthesiology
+MD Anatomy
+MD Ayurveda
+MD Biochemistry
+MD Community Medicine
+MD Dermatology Venereology and Leprosy
+MD Emergency Medicine
+MD Family Medicine
+MD Forensic Medicine
+MD General Medicine
+MD Geriatrics
+MD Homoeopathy
+MD Hospital Administration
+MD Immunohematology and Transfusion Medicine
+MD Laboratory Medicine
+MD Medical Genetics
+MD Microbiology
+MD Nuclear Medicine
+MD Obstetrics and Gynaecology
+MD Palliative Medicine
+MD Pathology
+MD Paediatrics
+MD Pharmacology
+MD Physical Medicine and Rehabilitation
+MD Physiology
+MD Psychiatry
+MD Radiodiagnosis
+MD Radiotherapy
+MD Respiratory Medicine
+MD Siddha
+MD Sports Medicine
+MD Tropical Medicine
+MD Unani
+MD Yoga
+MHA
+MHM
+MOptom
+MPH
+MPO
+MPT Cardiorespiratory Physiotherapy
+MPT Community Health Physiotherapy
+MPT Musculoskeletal Physiotherapy
+MPT Neurology Physiotherapy
+MPT Paediatrics Physiotherapy
+MPT Sports Physiotherapy
+MS General Surgery
+MS Obstetrics and Gynaecology
+MS Ophthalmology
+MS Orthopaedics
+MS Otorhinolaryngology
+MSc Anatomy
+MSc Audiology
+MSc Biochemistry
+MSc Biomedical Engineering
+MSc Biomedical Science
+MSc Biostatistics
+MSc Biotechnology
+MSc Clinical Nutrition
+MSc Clinical Psychology
+MSc Clinical Research
+MSc Dietetics and Food Service Management
+MSc Epidemiology
+MSc Food Science and Nutrition
+MSc Genetic Counseling
+MSc Genetics
+MSc Health Data Science
+MSc Health Economics
+MSc Health Informatics
+MSc Medical Biochemistry
+MSc Medical Biotechnology
+MSc Medical Genetics
+MSc Medical Imaging Technology
+MSc Medical Laboratory Technology
+MSc Medical Microbiology
+MSc Medical Physics
+MSc Medical Physiology
+MSc Microbiology
+MSc Neuroscience
+MSc Nuclear Medicine Technology
+MSc Nutrition and Dietetics
+MSc Optometry
+MSc Perfusion Technology
+MSc Physiology
+MSc Radiography and Imaging Technology
+MSc Radiological Physics
+MSc Radiotherapy Technology
+MSc Respiratory Therapy
+MSc Rehabilitation Psychology
+MSc Speech Language Pathology
+MSW Medical and Psychiatric Social Work
+MTech Biomedical Engineering
+MTech Biotechnology
+MPhil Clinical Psychology
+MPhil Psychiatric Social Work
+MPhil Rehabilitation Psychology
+PhD Biochemistry
+PhD Biomedical Engineering
+PhD Biotechnology
+PhD Clinical Psychology
+PhD Epidemiology
+PhD Hospital Administration
+PhD Medical Biotechnology
+PhD Medical Microbiology
+PhD Medical Physics
+PhD Nursing
+PhD Pharmacy
+PhD Physiology
+PhD Public Health
+PharmD
+Post Basic BSc Nursing
+PsyD Clinical Psychology

@@ -1,0 +1,726 @@
+abdominal examination
+abdominal paracentesis
+abdominoplasty
+abg sampling
+abscess incision and drainage
+absorbable suture handling
+acetabulum fracture traction application
+acid fast staining
+acoustic reflex testing
+acute coronary syndrome management
+acute stroke management
+adenoidectomy
+adenotonsillectomy
+advanced cardiac life support
+advanced trauma life support
+airway assessment
+airway exchange catheter use
+airway management
+alcohol withdrawal management
+allergy testing skin prick
+allograft preparation orthopedic
+amniocentesis
+amputation above knee
+amputation below knee
+anesthesia machine check
+anesthesia preoperative evaluation
+anesthesia record keeping
+anterior cruciate ligament reconstruction assistance
+angiography assistance
+angioplasty assistance
+ankle brachial index measurement
+antibiotic stewardship
+anticoagulation management
+antimicrobial susceptibility testing
+antenatal fetal monitoring non stress test
+apgar scoring
+appendicectomy laparoscopic
+appendicectomy open
+appendicular mass management conservative
+arterial blood gas interpretation
+arterial cannulation
+arteriovenous fistula creation assistance
+arthrocentesis
+arthroscopy knee diagnostic
+ascitic fluid tapping
+aspiration cytology fine needle
+asthma exacerbation management
+asthma inhaler spacer education
+atls primary survey
+autoclave operation
+autopsy assistance
+balance training physiotherapy
+bandage application crepe and compression
+barlow and ortolani test
+back slab application
+bag mask ventilation
+bedside echocardiography basic
+bedside thoracic ultrasound
+biliary drain care
+biochemistry analyzer operation
+biomedical waste segregation
+biopsy punch skin
+biopsy tru cut
+birth attendance normal delivery
+blood bank crossmatch
+blood culture collection
+blood gas analysis
+blood glucose monitoring capillary
+blood grouping and typing
+blood product issue and documentation
+blood sample collection venipuncture
+blood sugar profile interpretation
+blood transfusion administration
+bloodborne pathogen precautions
+body composition analysis
+bone casting plaster of paris
+bone densitometry operation
+bone marrow aspiration
+bone marrow biopsy assistance
+bowel anastomosis hand sewn
+brachial plexus block
+breast examination clinical
+breech delivery assistance
+bronchodilator nebulization
+bronchoscopy flexible
+burn wound debridement
+burns resuscitation
+bystander resuscitation training
+cadaveric dissection
+caesarean section
+cancer chemotherapy preparation
+cancer staging documentation
+cardiac arrest team leadership
+cardiac auscultation
+cardiac monitoring telemetry
+cardioversion synchronized
+cardiopulmonary resuscitation
+carotid intima media thickness measurement
+case sheet documentation
+cast application and removal
+cataract surgery small incision
+caudal block anesthesia
+cautery hemostasis
+central line insertion
+central sterile supply management
+cerumen removal
+cervical cerclage assistance
+cervical screening pap smear
+chest drain insertion
+chest physiotherapy
+chest physiotherapy percussion and vibration
+chest tube management
+chest x ray interpretation
+child growth monitoring
+cholera rehydration protocol
+cholestasis management initial
+cholecystectomy laparoscopic
+choledocholithotomy assistance
+cholesteatoma surgery assistance
+circulatory shock management
+circumcision
+clinical audit
+clinical pharmacokinetics
+clinical photography medical
+clinical trial randomization procedures
+closure of laceration simple suturing
+cochlear implant programming
+colectomy subtotal
+colonoscopy diagnostic
+combined spinal epidural anesthesia
+communication in breaking bad news
+communication skills patient counseling
+community based rehabilitation planning
+community health survey
+complete blood count analyzer operation
+consent taking for procedures
+congenital anomaly counseling
+conservative management of head injury
+contact tracing
+contrast administration intravenous
+contrast enhanced ct scan preparation
+contraceptive counseling
+corneal foreign body removal
+corneal scraping for culture
+coronary care unit monitoring
+counseling for smoking cessation
+covid sampling and ppe protocols
+cranial nerve examination
+craniotomy assistance
+crash cart maintenance
+creatinine clearance calculation
+critical care ultrasound
+critical incident reporting
+cryotherapy dermatology
+cryostat operation
+ct scan technologist operation
+curettage dental
+custom foot orthosis fabrication
+cystoscopy assistance
+debridement of wound surgical
+deep venous thrombosis prophylaxis
+defibrillation
+deformity correction plaster techniques
+dental impression making alginate
+dental scaling and root planing
+depression screening phq nine administration
+dermatoscopy
+desaturation management oxygen escalation
+diabetes counseling diet and lifestyle
+diabetes insulin pen technique
+diabetic foot examination
+diabetic ketoacidosis management protocol
+dialysis hemodialysis setup
+diathermy physiotherapy
+diet planning clinical nutrition
+dietary recall assessment twenty four hour
+dilation and curettage
+digital nerve block
+digital rectal examination
+direct laryngoscopy
+disaster triage
+dislocation reduction shoulder
+dissection in anatomy lab
+dobutamine stress echo assistance
+donning and doffing
+dose calculation pediatric
+drain care surgical
+dressings and wound care
+drawing up and labeling medications
+drug dispensing retail pharmacy
+drug information service
+drug inventory management
+drug reconciliation
+drug safety pharmacovigilance
+dual energy x ray absorptiometry operation
+dry needling physiotherapy
+ear piercing medical
+ear syringing
+ecg acquisition
+ecg interpretation
+echocardiography basic transthoracic
+echocardiography doppler evaluation
+echocardiography pediatric screening
+ect electroconvulsive therapy administration
+edema assessment pitting scale
+eeg electrode placement
+electrocardiography lead placement
+electrocautery use
+electrolyte analyzer operation
+electrolyte replacement protocols
+electromyography assistance
+electrophoresis gel casting and running
+elisa technique
+emergency cricothyrotomy
+emergency obstetric care basic
+end of life care communication
+endodontic access opening
+endoscopic sinus surgery assistance
+endoscopy assistance upper gi
+endoscopy disinfection high level
+enteral feeding tube insertion
+enteral nutrition calculation
+ent foreign body removal
+epidural anesthesia
+epidural blood patch
+episiotomy and repair
+epistaxis control anterior nasal packing
+erythrocyte sedimentation rate test
+ethical consent and confidentiality
+exercise stress testing treadmill
+eye examination slit lamp
+facemask fitting for oxygen
+facial nerve examination
+family planning counseling
+fast ultrasound for trauma
+fasting blood sample collection
+fasciotomy assistance
+fecal occult blood test
+fecal sample collection for culture
+fetomaternal hemorrhage screening kleihauer betke
+fetoscope pinard use
+fetus heart rate monitoring doppler
+fiberoptic bronchoscopy assistance
+fine motor rehabilitation training
+fine needle aspiration cytology
+first aid training
+first responder trauma care
+flow cytometry operation
+fluid and electrolyte management
+fluid resuscitation in sepsis
+foley catheter insertion
+foot care podiatry basic
+forceps delivery
+foreskin dorsal slit
+fracture fixation intramedullary nailing assistance
+fracture immobilization above elbow slab
+fracture reduction closed
+fracture splinting
+fundoscopy
+gastric lavage
+gastric tube placement confirmation
+gastrectomy partial
+gastrectomy total
+gastroenterology procedure room assistance
+gastrostomy care
+gcs scoring
+general anesthesia maintenance
+general physical examination
+genetic counseling basics
+geriatric assessment
+gestational diabetes screening
+glucose tolerance test
+glucometer calibration
+glucometer quality control
+grommet insertion assistance
+gynaecological examination speculum
+hand hygiene compliance auditing
+hand over communication using isbar
+hand splint fabrication thermoplastic
+hand washing technique
+head and neck examination ent
+head injury initial management
+health education session delivery
+hearing aid fitting
+hearing screening otoacoustic emissions
+hearing test pure tone audiometry
+helicobacter pylori rapid test
+hemicolectomy left
+hemicolectomy right
+hemoglobin estimation cyanmethemoglobin
+hemodialysis catheter care
+hemodialysis vascular access cannulation
+hemorrhage control tourniquet use
+hemothorax management chest tube
+hemostasis techniques surgical
+hepatic function test interpretation
+hernia repair laparoscopic
+hernia repair open
+herniotomy and herniorrhaphy
+hip spica application
+histopathology grossing
+hiv counseling and testing
+holter monitoring setup
+home based newborn care
+home nebulizer use education
+hysterectomy abdominal
+hysterectomy vaginal
+hysteroscopy diagnostic assistance
+icu charting and monitoring
+illizarov frame assistance
+immunization adverse event reporting
+immunization cold chain maintenance
+immunization schedule administration
+immunohematology testing
+immunohistochemistry staining
+implant insertion contraceptive
+incision and drainage
+incision biopsy
+infection control audit
+infection prevention and control
+infiltration anesthesia local
+informed consent counseling
+infusion pump setup
+inhalational induction anesthesia
+inhaler technique demonstration
+insulin counseling
+insulin pump initiation
+insulin titration
+instrument sterilization
+instrumentation orthopedic theater setup
+integrated counselling and testing center protocols
+intensive care ventilator management basic
+intercostal drain insertion
+internal jugular vein cannulation
+interpretation of arterial blood gas
+intramuscular injection
+intraarticular injection knee
+intraoperative nerve monitoring setup
+intraosseous access
+intrapartum fetal monitoring
+intrauterine device insertion
+intravenous cannulation
+intravenous medication administration
+intravenous regional anesthesia bier block
+intravitreal injection
+iontophoresis physiotherapy
+irrigation of ear
+ischemic stroke thrombolysis protocol
+iv fluid calculation maintenance and deficit
+jaundice evaluation neonatal
+joint aspiration knee
+joint mobilization physiotherapy
+jones bandage application
+kangaroo mother care counseling
+k wire fixation assistance
+keratometry
+keratoplasty assistance
+kidney biopsy assistance
+kinesiology taping
+laryngeal mask airway insertion
+laryngoscopy video orientation
+laser hair removal dermatology
+laser photocoagulation retinal assistance
+laser safety in theater
+lateral canthotomy emergency
+lateral positioning for spinal anesthesia
+left lateral tilt in pregnancy
+lft interpretation
+ligasure vessel sealing usage
+limb length measurement
+lithotripsy assistance
+liver biopsy assistance
+liver function test sampling
+local anesthesia infiltration
+local flap design and elevation
+low anterior resection assistance
+lumbar puncture
+lumpectomy assistance
+lung function test spirometry
+lymph node biopsy excision
+malaria rapid diagnostic test
+malaria smear staining
+manual therapy physiotherapy
+manual vacuum aspiration
+mask ventilation two person technique
+mastoid dressing
+mastoidectomy assistance
+maternal and child health record keeping
+maxillofacial trauma airway management
+mckenzie method assessment
+mcgill forceps removal of foreign body
+mechanical ventilation basic modes
+medical billing and coding
+medical record documentation
+medical research ethics training
+medication calculation dosage
+medication chart review
+medication error reporting
+mental status examination
+mesh hernioplasty
+microscopy light
+microbiological culture plating
+microtomy
+midline catheter insertion
+milk bank pasteurization holder method
+minor ot assistance
+mmt manual muscle testing
+molar extraction surgical
+mole excision simple
+monitoring anesthesia depth
+mother and baby friendly hospital initiative practices
+mri safety screening
+muscle power grading
+nail avulsion partial
+nasal endoscopy assistance
+nasal packing posterior
+nasal polypectomy assistance
+nasogastric tube insertion
+nasopharyngeal airway insertion
+nebulization therapy
+neonatal jaundice phototherapy setup
+neonatal resuscitation
+nephrectomy open
+nephrostomy tube care
+nerve conduction study assistance
+nerve stimulator guided block
+neurodevelopmental therapy bobath
+neurological examination
+neuromuscular electrical stimulation
+neurosurgical drill handling assistance
+neurovascular assessment limb
+newborn hearing screening
+non invasive ventilation setup
+non stress test interpretation
+non stress test tracing interpretation
+normal delivery active management third stage
+normal vaginal delivery conduct
+nsaid safety counseling
+nuclear medicine patient preparation
+nursing care plan formulation
+nutritional assessment
+obstetric ultrasound basic
+occupational therapy adaptive equipment training
+ocular tonometry
+ogtt sample collection
+oncology chemotherapy day care nursing
+oncology port care
+oncology safe handling of cytotoxics
+onco surgery margin marking
+ophthalmic biometry
+ophthalmic nursing eye drop instillation
+ophthalmoscopy direct
+open cholecystectomy
+open reduction internal fixation assistance
+operative vaginal delivery forceps and vacuum
+oral airway insertion
+oral antidiabetic counseling
+oral rehydration therapy
+oropharyngeal airway insertion
+orthodontic bracket bonding
+orthodontic impression making
+orthopedic traction application
+ot table positioning
+otoplasty assistance
+ovarian cystectomy assistance
+oxygen concentrator operation
+oxygen cylinder calculation
+oxygen therapy
+pacemaker interrogation basic
+pacemaker temporary pacing setup
+pain assessment scales use
+palliative care symptom management
+pancreaticoduodenectomy assistance
+pap smear collection
+paracentesis abdominal
+parenteral nutrition administration
+partograph plotting
+pathology slide staining
+patient identification protocol
+patient positioning in theater
+patient transport safe transfer
+peak expiratory flow measurement
+pelvic binder application
+pelvic examination bimanual
+percutaneous endoscopic gastrostomy care
+perimetry visual field testing
+perioperative antibiotic prophylaxis timing
+perioperative blood conservation
+peripheral nerve block ultrasound guided
+peripheral smear preparation
+perimetry visual field testing
+peritoneal dialysis catheter care
+peritoneal dialysis setup
+phacoemulsification cataract surgery
+pharmacoeconomics basic analysis
+pharmacogenomics basics
+pharmacokinetics dose adjustment
+pharmacology counseling adverse effects
+pharmacy compounding non sterile
+pharmacy inventory control
+phlebotomy
+phlebotomy pediatric
+physical examination general
+physical modality ultrasound therapy
+physiotherapy chest expansion exercises
+physiotherapy gait training
+physiotherapy home exercise program
+picc line care
+pipetting micropipette use
+plaster application and removal
+pleural biopsy closed
+pleural fluid aspiration
+pleural tap thoracentesis
+pleurodesis assistance
+pneumothorax needle decompression
+point of care glucose testing
+point of care ultrasound
+polysomnography hookup basics
+portable x ray positioning
+post anesthesia care unit management
+post exposure prophylaxis counseling
+post exposure rabies prophylaxis
+postnatal care counseling
+postoperative nausea and vomiting prophylaxis
+postoperative pain management
+postoperative ward round documentation
+potassium hydroxide mount
+practice based research methods basic
+pregnancy test urine
+pre anesthesia checkup
+preoperative fasting guidelines counseling
+prescription audit
+pressure garment measurement burn rehab
+pressure sore prevention
+primary health center triage
+privacy and dignity maintenance
+proctology banding for hemorrhoids
+programming of hearing aids
+prosthetic and orthotic fitting basic
+prosthetic socket check
+protein electrophoresis interpretation
+protein estimation biuret method
+psychological first aid
+psychotherapy basic supportive
+pulmonary function testing spirometry
+pulmonary rehabilitation program designing
+pulse oximetry monitoring
+pulseless electrical activity algorithm
+pyeloplasty assistance
+quality control in laboratory
+radiation protection principles
+radiation therapy immobilization mask making
+radiography positioning
+radiology reporting structured
+rapid sequence induction
+rash evaluation dermatology
+receipt of laboratory samples
+record keeping in pharmacy
+reduction of paraphimosis
+refraction retinoscopy and subjective acceptance
+renal biopsy assistance
+renal function test interpretation
+residential care nursing geriatric
+resuscitation of newborn
+resuscitation team communication closed loop
+retinal laser procedure assistance
+retinoscopy
+rheumatology joint examination
+rhinoplasty assistance
+road traffic trauma triage
+rooming in counselling lactation
+root canal treatment
+sacroiliac joint injection
+saline nebulization
+sample accessioning in laboratory
+scalp block anesthesia
+scalp laceration repair
+scalp vein set insertion
+scar management silicone therapy
+scar revision minor
+schematic dental charting
+school health screening
+screening mammography positioning
+scrub nurse asepsis techniques
+seizure management acute
+semen analysis laboratory
+sentinel lymph node biopsy assistance
+sepsis bundle implementation
+sexual assault medico legal examination
+sexual history taking
+shock management
+shoulder arthroscopy assistance
+shoulder reduction anterior dislocation
+sigmoidoscopy rigid
+simple tooth extraction
+sinonasal debridement
+sinus endoscopy assistance
+skin biopsy punch
+skin prick test
+slit lamp examination
+small incision cataract surgery
+soft tissue sarcoma wide local excision assistance
+spirometry interpretation
+spinal anesthesia
+spinal surgery positioning prone
+splenic injury non operative management
+splenectomy open
+splinting first aid
+stapler hemorrhoidopexy assistance
+sterile technique maintenance
+sterilizer validation biological indicator
+stitch removal
+stoma care
+stoma site marking preoperative
+stress management counseling
+stroke rehabilitation therapy
+subclavian vein cannulation
+suprapubic catheterization
+suctioning airway oropharyngeal
+suturing techniques interrupted and continuous
+syncope evaluation initial
+synovial fluid analysis
+systemic examination general
+telemedicine consultation etiquette
+temperature measurement non contact
+tendon repair assistance
+tendon transfer assistance
+tension free vaginal tape assistance
+therapeutic drug monitoring
+thoracentesis
+thoracostomy tube insertion
+throat swab collection
+thyroid fine needle aspiration cytology
+thyroid function test interpretation
+thyroidectomy hemi
+thyroidectomy total
+tissue culture aseptic technique
+tissue expansion and flap delay assistance
+tonsillectomy
+tooth extraction surgical
+tooth restoration composite
+tourniquet application first aid
+tourniquet tests varicose vein
+toxidrome recognition
+trabeculectomy glaucoma surgery
+tracheal suctioning
+tracheostomy care
+tracheostomy tube change
+traction application skin and skeletal
+transesophageal echocardiography assistance
+transfusion crossmatch gel card
+transfusion medicine component preparation
+transfusion reaction management
+transfusion services documentation
+transnasal endoscopy assistance
+transport of critically ill patient
+transplant immunosuppression counseling basic
+transrectal prostate biopsy assistance
+transrectal ultrasound assistance
+transurethral catheterization
+transurethral resection of bladder tumor
+transurethral resection of prostate
+transport ventilator setup
+trauma primary survey
+trauma secondary survey
+triage in emergency
+trigger point injection
+trouble shooting of biomedical equipment
+tubectomy minilap
+tuberculin skin test administration
+turbinate reduction assistance
+tympanoplasty
+ulnar nerve block
+ultrasound abdomen basic scanning
+ultrasound guided vascular access
+ultrasound therapy physiotherapy
+ultraviolet sterilization protocols
+umbilical vein catheterization neonatal
+urinalysis microscopy
+urinalysis wet mount and dipstick
+urinary bladder catheterization
+urinary tract infection management uncomplicated
+uroflowmetry
+ureteric stent placement
+ureteroscopy assistance
+vaccination anaphylaxis management
+vaccination intradermal administration
+vaccination intramuscular administration
+vaccination subcutaneous administration
+vacuum assisted vaginal delivery
+vaginal examination in labor
+varicose vein doppler assessment
+vascular access femoral vein cannulation
+vascular anastomosis assistance
+vascular surgery clamp handling
+vasectomy no scalpel technique
+venesection therapeutic phlebotomy
+ventilation noninvasive
+ventilator alarm troubleshooting
+ventilator associated pneumonia prevention bundle
+ventilator weaning protocols
+verbal autopsy field methods
+video assisted thoracoscopic surgery assistance
+video endoscopy tower setup
+video laryngoscopy
+visual acuity testing
+vitreoretinal surgery assistance
+voice therapy basics
+volar slab application
+voluntary counseling and testing
+vitals charting and early warning score
+warfarin dose adjustment using inr
+waste segregation biomedical
+water sampling for microbiology
+wheelchair prescription basic
+wheezing management acute
+wound debridement
+wound dressing aseptic
+wound irrigation and antisepsis
+wrist arthroscopy assistance
+x ray chest interpretation
+yag laser capsulotomy assistance
+yoga based pulmonary rehab basics
+yoga breathing exercises counseling
+z track intramuscular injection
+zygomatic arch fracture reduction closed

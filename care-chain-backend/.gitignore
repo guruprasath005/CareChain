@@ -1,0 +1,42 @@
+# Kiro
+.kiro/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files — only .env.example should be committed
+.env
+.env.local
+.env.production
+.env.render
+.env.staging
+.env.*.local
+*.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/

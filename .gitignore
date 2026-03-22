@@ -1,0 +1,49 @@
+node_modules
+.kiro
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.render
+.env.staging
+.env.*.local
+*.env
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# Build output
+dist/
+build/
+
+# Test / tooling artifacts
+coverage/
+**/tsc_errors.txt
+
+# Python (reference backend / tooling)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+CareChainX/backend/env/
+
+# Expo local settings
+.expo/
+
+# Large media files
+*.mp4
+*.MP4
+*.mov
+*.MOV
