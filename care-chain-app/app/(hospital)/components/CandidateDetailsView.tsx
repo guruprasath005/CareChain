@@ -196,12 +196,31 @@ export default function CandidateDetailsView({
     }
   };
 
+  const parseScheduleToISO = (dateStr: string, timeStr: string): string => {
+    const part = timeStr.split(' - ')[0]?.trim() || timeStr;
+    const match = part.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    let hours = 12, minutes = 0;
+    if (match) {
+      hours = parseInt(match[1], 10);
+      minutes = parseInt(match[2], 10);
+      if (match[3].toUpperCase() === 'PM' && hours !== 12) hours += 12;
+      if (match[3].toUpperCase() === 'AM' && hours === 12) hours = 0;
+    }
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const date = new Date(y, m - 1, d, hours, minutes, 0, 0);
+    return date.toISOString();
+  };
+
   const handleScheduleInterview = async (data: { date: string; time: string; message: string }) => {
     setIsSubmitting(true);
     try {
       if (showApplicationActions && applicationId) {
-        // Update application status to interview_scheduled
-        const response = await hospitalApi.updateApplicationStatus(applicationId, 'interview_scheduled', data.message);
+        const scheduledAt = parseScheduleToISO(data.date, data.time);
+        const response = await hospitalApi.scheduleInterview(applicationId, {
+          scheduledAt,
+          type: 'in_person',
+          notes: data.message || undefined,
+        });
         if (response.success) {
           Alert.alert(
             'Interview Scheduled! 📅',
@@ -220,7 +239,6 @@ export default function CandidateDetailsView({
           Alert.alert('Error', 'Failed to schedule interview');
         }
       } else {
-        // For search mode, just show a message
         Alert.alert(
           'Interview Request',
           'This action is only available for applicants. Please invite this candidate first.',

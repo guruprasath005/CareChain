@@ -172,12 +172,18 @@ export const scheduleInterviewSchema = z.object({
 });
 
 export const sendOfferSchema = z.object({
-  amount: z.number().positive('Offer amount must be positive'),
+  amount: z.number().positive().optional(),
+  salary: z.number().positive().optional(),
   currency: z.string().length(3).default('INR'),
   salaryType: z.enum(['hourly', 'daily', 'monthly', 'annual']).optional(),
   startDate: z
     .string()
-    .refine((d) => !isNaN(Date.parse(d)), 'Invalid start date'),
+    .refine((d) => !isNaN(Date.parse(d)), 'Invalid start date')
+    .optional(),
+  joiningDate: z
+    .string()
+    .refine((d) => !isNaN(Date.parse(d)), 'Invalid joining date')
+    .optional(),
   reportingDate: z
     .string()
     .refine((d) => !isNaN(Date.parse(d)), 'Invalid reporting date')
@@ -188,7 +194,17 @@ export const sendOfferSchema = z.object({
     .string()
     .refine((d) => !isNaN(Date.parse(d)), 'Invalid expiry date')
     .optional(),
-});
+  offerConfirmationDate: z
+    .string()
+    .refine((d) => !isNaN(Date.parse(d)), 'Invalid offer confirmation date')
+    .optional(),
+}).refine(
+  (data) => (data.amount ?? data.salary) !== undefined,
+  { message: 'Offer amount or salary is required', path: ['amount'] }
+).refine(
+  (data) => (data.startDate ?? data.joiningDate) !== undefined,
+  { message: 'Start date or joining date is required', path: ['startDate'] }
+);
 
 export const hireApplicantSchema = z.object({
   startDate: z

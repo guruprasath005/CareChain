@@ -14,6 +14,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useJobApplications, ApplicationStatus } from '@/hooks';
 import OfferModal, { OfferFormData } from '../../components/OfferModal';
+import ScheduleInterviewModal from '../../components/ScheduleInterviewModal';
 import { hospitalApi } from '@/services/api';
 
 type TabKey = 'applicants' | 'invited' | 'shortlisted' | 'rejected' | 'pending';
@@ -48,12 +49,13 @@ export default function JobApplicationsScreen() {
   const [selectedAppName, setSelectedAppName] = useState<string>('');
   const [actionModalVisible, setActionModalVisible] = useState(false);
   const [offerModalVisible, setOfferModalVisible] = useState(false);
+  const [scheduleInterviewModalVisible, setScheduleInterviewModalVisible] = useState(false);
   const [sortModalVisible, setSortModalVisible] = useState(false);
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sortBy, setSortBy] = useState<string[]>([]);
 
-  const { applications, isLoading, error, refresh, updateStatus } = useJobApplications(
+  const { applications, isLoading, error, refresh, updateStatus, scheduleInterview } = useJobApplications(
     typeof jobId === 'string' ? jobId : ''
   );
 
@@ -90,6 +92,56 @@ export default function JobApplicationsScreen() {
       setNotes('');
     } else {
       Alert.alert('Error', result.error || 'Failed to update status');
+    }
+  };
+
+  const parseScheduleToISO = (dateStr: string, timeStr: string): string => {
+    const part = timeStr.split(' - ')[0]?.trim() || timeStr;
+    const match = part.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    let hours = 12, minutes = 0;
+    if (match) {
+      hours = parseInt(match[1], 10);
+      minutes = parseInt(match[2], 10);
+      if (match[3].toUpperCase() === 'PM' && hours !== 12) hours += 12;
+      if (match[3].toUpperCase() === 'AM' && hours === 12) hours = 0;
+    }
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const date = new Date(y, m - 1, d, hours, minutes, 0, 0);
+    return date.toISOString();
+  };
+
+  const handleScheduleInterviewFromList = async (data: { date: string; time: string; message: string }) => {
+    if (!selectedApp) return;
+    setIsSubmitting(true);
+    try {
+      const scheduledAt = parseScheduleToISO(data.date, data.time);
+      const result = await scheduleInterview(selectedApp, {
+        scheduledAt,
+        type: 'in_person',
+        notes: data.message || undefined,
+      });
+      if (result.success) {
+        Alert.alert(
+          'Interview Scheduled! 📅',
+          `Interview scheduled for ${data.date} at ${data.time}. The candidate will be notified.`,
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                setScheduleInterviewModalVisible(false);
+                setSelectedApp(null);
+                refresh();
+              },
+            },
+          ]
+        );
+      } else {
+        Alert.alert('Error', result.error || 'Failed to schedule interview');
+      }
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Failed to schedule interview');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -422,7 +474,10 @@ export default function JobApplicationsScreen() {
 
             <TouchableOpacity
               className="bg-purple-100 rounded-xl py-4 mb-3"
-              onPress={() => selectedApp && handleStatusUpdate(selectedApp, 'interview_scheduled')}
+              onPress={() => {
+                setActionModalVisible(false);
+                setScheduleInterviewModalVisible(true);
+              }}
             >
               <Text className="text-purple-900 font-semibold text-center">Schedule Interview</Text>
             </TouchableOpacity>
@@ -452,6 +507,19 @@ export default function JobApplicationsScreen() {
         visible={offerModalVisible}
         onClose={() => setOfferModalVisible(false)}
         onSubmit={handleSendOffer}
+        candidateName={selectedAppName}
+        jobTitle="Position"
+        isSubmitting={isSubmitting}
+      />
+
+      {/* Schedule Interview Modal */}
+      <ScheduleInterviewModal
+        visible={scheduleInterviewModalVisible}
+        onClose={() => {
+          setScheduleInterviewModalVisible(false);
+          setSelectedApp(null);
+        }}
+        onSubmit={handleScheduleInterviewFromList}
         candidateName={selectedAppName}
         jobTitle="Position"
         isSubmitting={isSubmitting}
