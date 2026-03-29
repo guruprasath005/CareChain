@@ -76,7 +76,7 @@ export const createJobSchema = z.object({
   shift: shiftSchema.optional(),
   location: z.object({
     city: z.string().min(1).max(100).trim(),
-    state: z.string().min(1).max(100).trim(),
+    state: z.string().min(1).max(100).trim().optional(),
     pincode: z
       .string()
       .regex(/^\d{6}$/, 'Pincode must be exactly 6 digits')
@@ -101,6 +101,7 @@ export const createJobSchema = z.object({
     .optional(),
   isUrgent: z.boolean().default(false),
   tags: z.array(z.string()).optional(),
+  publish: z.boolean().optional(),
 });
 
 // ─── Update job (all fields optional) ─────────────────────────────────────────

@@ -1390,7 +1390,8 @@ export const hospitalController = {
       const { id } = req.params;
       const userId = req.user!.id;
 
-      const { application, assignment } = await applicationService.hireApplicant(id, userId);
+      const { startDate, notes } = req.body;
+      const { application, assignment } = await applicationService.hireApplicant(id, userId, { startDate, notes });
       ApiResponse.success(res, { application, assignment }, 'Applicant hired');
     } catch (error: any) {
       if (error.message.includes('Invalid') || error.message.includes('not found')) {

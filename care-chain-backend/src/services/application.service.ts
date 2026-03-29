@@ -333,6 +333,11 @@ class ApplicationService {
     ): Promise<Application> {
         const application = await Application.findOne({
             where: { id: applicationId, hospitalId },
+            include: [
+                { association: 'job', attributes: ['id', 'title'] },
+                { association: 'doctor', attributes: ['id', 'email', 'fullName'] },
+                { association: 'applicationHospital', include: [{ association: 'hospitalProfile' }] },
+            ],
         });
 
         if (!application) {
@@ -343,6 +348,28 @@ class ApplicationService {
         application.interview = interview;
         application.addStatusHistory(ApplicationStatus.INTERVIEW_SCHEDULED, hospitalId);
         await application.save();
+
+        // Send notification email to doctor
+        try {
+            const doctor = application.doctor as User;
+            const job = application.job as Job;
+            const hospital = application.applicationHospital as User;
+            const hospitalProfile = (hospital as any).hospitalProfile as Hospital;
+
+            await emailService.sendApplicationStatusEmail(
+                doctor.email,
+                doctor.fullName,
+                job.title,
+                hospitalProfile?.hospitalName || hospital.fullName,
+                ApplicationStatus.INTERVIEW_SCHEDULED,
+                undefined
+            );
+        } catch (error) {
+            logger.error(`Failed to send interview scheduled email for application ${applicationId}:`, error);
+        }
+
+        // Send in-app notification
+        await this.sendNotification(application, ApplicationStatus.INTERVIEW_SCHEDULED);
 
         logger.info(`Interview scheduled for application ${applicationId}`);
         return application;
@@ -785,13 +812,21 @@ Please respond to this offer by the deadline. You can Accept or Decline from the
     /**
      * Hire applicant (after offer accepted)
      */
-    async hireApplicant(applicationId: string, hospitalId: string): Promise<{ application: Application; assignment: Assignment }> {
+    async hireApplicant(
+        applicationId: string,
+        hospitalId: string,
+        options?: { startDate?: string; notes?: string }
+    ): Promise<{ application: Application; assignment: Assignment }> {
         const transaction = await sequelize.transaction();
 
         try {
             const application = await Application.findOne({
                 where: { id: applicationId, hospitalId },
-                include: [{ association: 'job' }],
+                include: [
+                    { association: 'job' },
+                    { association: 'doctor', attributes: ['id', 'email', 'fullName'] },
+                    { association: 'applicationHospital', include: [{ association: 'hospitalProfile' }] },
+                ],
                 transaction,
             });
 
@@ -807,8 +842,15 @@ Please respond to this offer by the deadline. You can Accept or Decline from the
                 ...application.offer,
                 acceptedAt: new Date().toISOString(),
             };
-            application.addStatusHistory(ApplicationStatus.HIRED, hospitalId);
+            application.addStatusHistory(ApplicationStatus.HIRED, hospitalId, options?.notes);
             await application.save({ transaction });
+
+            // Resolve start date: prefer explicit options, then offer date, then today
+            const resolvedStartDate = options?.startDate
+                ? new Date(options.startDate)
+                : application.offer?.startDate
+                    ? new Date(application.offer.startDate)
+                    : new Date();
 
             // Create assignment
             const assignment = await Assignment.create({
@@ -819,7 +861,7 @@ Please respond to this offer by the deadline. You can Accept or Decline from the
                 title: job.title,
                 department: job.department,
                 status: AssignmentStatus.ACTIVE,
-                startDate: application.offer?.startDate ? new Date(application.offer.startDate) : new Date(),
+                startDate: resolvedStartDate,
                 compensation: job.compensation,
             }, { transaction });
 
@@ -846,6 +888,27 @@ Please respond to this offer by the deadline. You can Accept or Decline from the
             }
 
             await transaction.commit();
+
+            // Send notification email to doctor
+            try {
+                const doctor = application.doctor as User;
+                const hospital = application.applicationHospital as User;
+                const hospitalProfile = (hospital as any).hospitalProfile as Hospital;
+
+                await emailService.sendApplicationStatusEmail(
+                    doctor.email,
+                    doctor.fullName,
+                    job.title,
+                    hospitalProfile?.hospitalName || hospital.fullName,
+                    ApplicationStatus.HIRED,
+                    options?.notes
+                );
+            } catch (error) {
+                logger.error(`Failed to send hire email for application ${applicationId}:`, error);
+            }
+
+            // Send in-app notification
+            await this.sendNotification(application, ApplicationStatus.HIRED, options?.notes);
 
             logger.info(`Applicant hired: ${applicationId}, Assignment: ${assignment.id}`);
             return { application, assignment };
@@ -1078,7 +1141,7 @@ Please respond to this offer by the deadline. You can Accept or Decline from the
             [ApplicationStatus.APPLIED]: null,
             [ApplicationStatus.UNDER_REVIEW]: null,
             [ApplicationStatus.SHORTLISTED]: 'shortlisted',
-            [ApplicationStatus.INTERVIEW_SCHEDULED]: 'interviewed',
+            [ApplicationStatus.INTERVIEW_SCHEDULED]: null,
             [ApplicationStatus.INTERVIEWED]: 'interviewed',
             [ApplicationStatus.OFFER_MADE]: null,
             [ApplicationStatus.OFFER_DECLINED]: null,

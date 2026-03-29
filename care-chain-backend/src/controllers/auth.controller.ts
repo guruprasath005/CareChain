@@ -158,8 +158,15 @@ export const authController = {
         },
         'Login successful'
       );
-    } catch (error) {
-      next(error);
+    } catch (error: any) {
+      const msg: string = error?.message || '';
+      if (msg.includes('Invalid email or password')) {
+        ApiResponse.unauthorized(res, msg);
+      } else if (msg.includes('deactivated')) {
+        ApiResponse.forbidden(res, msg);
+      } else {
+        next(error);
+      }
     }
   },
 

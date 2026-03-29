@@ -3,6 +3,7 @@ import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/d
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -87,7 +88,8 @@ export default function JobDetailsScreen() {
     experience: '',
   });
 
-  const [isFocus, setIsFocus] = useState(false);
+  const [isFocusJobType, setIsFocusJobType] = useState(false);
+  const [isFocusSalaryType, setIsFocusSalaryType] = useState(false);
 
   const jobTypeData = [
     { label: 'Full Time', value: 'Full Time' },
@@ -231,7 +233,15 @@ export default function JobDetailsScreen() {
   };
 
   const onDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    setShowDatePicker(false);
+    // On Android the picker is a dialog — close it after any interaction
+    if (Platform.OS === 'android') {
+      setShowDatePicker(false);
+    }
+    // On iOS the picker is inline — only close when dismissed, not on every scroll
+    if (event.type === 'dismissed') {
+      setShowDatePicker(false);
+      return;
+    }
     if (selectedDate && activeDateField) {
       if (activeDateField === 'start') setStartDate(selectedDate);
       if (activeDateField === 'end') setEndDate(selectedDate);
@@ -427,7 +437,7 @@ export default function JobDetailsScreen() {
 
           <Text className="text-sm text-gray-700 mb-2">Job Type</Text>
           <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, isFocusJobType && { borderColor: 'blue' }]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -437,13 +447,13 @@ export default function JobDetailsScreen() {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? 'Select job type' : '...'}
+            placeholder={!isFocusJobType ? 'Select job type' : '...'}
             value={jobType}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
+            onFocus={() => setIsFocusJobType(true)}
+            onBlur={() => setIsFocusJobType(false)}
             onChange={item => {
               setJobType(item.value);
-              setIsFocus(false);
+              setIsFocusJobType(false);
             }}
           />
 
@@ -451,7 +461,7 @@ export default function JobDetailsScreen() {
             Salary Type <Text className="text-red-500">*</Text>
           </Text>
           <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, isFocusSalaryType && { borderColor: 'blue' }]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -466,13 +476,13 @@ export default function JobDetailsScreen() {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? 'Select salary type' : '...'}
+            placeholder={!isFocusSalaryType ? 'Select salary type' : '...'}
             value={salaryType}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
+            onFocus={() => setIsFocusSalaryType(true)}
+            onBlur={() => setIsFocusSalaryType(false)}
             onChange={item => {
               setSalaryType(item.value);
-              setIsFocus(false);
+              setIsFocusSalaryType(false);
             }}
           />
 
@@ -497,16 +507,31 @@ export default function JobDetailsScreen() {
           <Text className="text-white text-center font-semibold text-base">Next</Text>
         </TouchableOpacity>
 
-        {showDatePicker && (
+      </ScrollView>
+
+      {showDatePicker && (
+        <>
+          {Platform.OS === 'ios' && (
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: '#f3f4f6', paddingHorizontal: 16, paddingVertical: 6 }}>
+              <TouchableOpacity onPress={() => setShowDatePicker(false)} style={{ paddingVertical: 6, paddingHorizontal: 12 }}>
+                <Text style={{ color: '#130160', fontWeight: '600', fontSize: 15 }}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          )}
           <RNDateTimePicker
-            value={new Date()}
+            value={
+              activeDateField === 'start' ? startDate :
+              activeDateField === 'end' ? endDate :
+              activeDateField === 'shiftStart' ? shiftStartTime :
+              shiftEndTime
+            }
             mode={datePickerMode}
             is24Hour={false}
-            display="default"
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
             onChange={onDateChange}
           />
-        )}
-      </ScrollView>
+        </>
+      )}
     </SafeAreaView>
   );
 }
